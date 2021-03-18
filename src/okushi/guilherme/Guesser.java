@@ -27,6 +27,10 @@ public class Guesser {
             this.numIn = scanner.nextInt();
             //System.out.println("O numero correto é: " + randNum);
             guessCalculator(this.numIn);
+            if (!AttemptCounter.compareLimit()){
+                //gameOver();
+                playAgain();
+            }
         }
     }
 
