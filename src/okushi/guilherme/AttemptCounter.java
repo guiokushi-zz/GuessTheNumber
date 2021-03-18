@@ -3,7 +3,7 @@ package okushi.guilherme;
 import java.util.Scanner;
 
 public class AttemptCounter {
-    public static int counter;
+    private static int counter;
     private static int limit;
     private static Scanner scanner = new Scanner(System.in);
 
@@ -31,5 +31,9 @@ public class AttemptCounter {
     public static void resetAll(){
         counter = 0;
         limit = 0;
+    }
+
+    public static int checkCount(){
+        return counter;
     }
 }

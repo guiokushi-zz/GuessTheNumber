@@ -17,7 +17,7 @@ public class Guesser {
         this.execution = execution = true;
     }
 
-    //Receive guess, set the limit and send to the guessCalculator
+    //Receive guess, set the limit, clear previous counters and send guess to the guessCalculator
     public void gameSystem() {
         this.randNum = rand.getRandomNumber();
         AttemptCounter.resetAll();
@@ -49,9 +49,11 @@ public class Guesser {
         }
 
     }
+
+    //Player reached the limit of atempts
     private void gameOver(){
 
-        System.out.println("You reached your limit of " + AttemptCounter.counter + " attempts");
+        System.out.println("You reached your limit of " + AttemptCounter.checkCount() + " attempts");
         System.out.println("GAME OVER");
 
         playAgain();
