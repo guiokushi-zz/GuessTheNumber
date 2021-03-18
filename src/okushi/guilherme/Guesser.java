@@ -10,7 +10,6 @@ public class Guesser {
     private boolean execution;
     private Scanner scanner;
     private RandNumber rand = new RandNumber();
-    //private AttemptCounter att = new AttemptCounter();
 
     //Initial conditions
     public Guesser() {
@@ -22,7 +21,7 @@ public class Guesser {
     public void gameSystem() {
         this.randNum = rand.getRandomNumber();
         //Max number of attempts
-        //att.limits();
+
         while (execution){
             System.out.println("Insert your guess!");
             this.numIn = scanner.nextInt();
@@ -34,15 +33,15 @@ public class Guesser {
     //Get the computer's number and compare the two integers
     private void guessCalculator(int numIn) {
         if (numIn == randNum){
-            System.out.println("Congratulations!!!\n");
-            //att.attempts();
+            System.out.println("Congratulations!!!");
+            AttemptCounter.setCount();
             playAgain();
         } else if (numIn < randNum){
-            System.out.println("The number is higher!\n");
-            //att.attempts();
+            System.out.println("The number is higher!");
+            AttemptCounter.setCount();
         } else {
-            System.out.println("The number is lower!\n");
-            //att.attempts();
+            System.out.println("The number is lower!");
+            AttemptCounter.setCount();
         }
 
     }
