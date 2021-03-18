@@ -21,7 +21,7 @@ public class Guesser {
     public void gameSystem() {
         this.randNum = rand.getRandomNumber();
         //Max number of attempts
-
+        AttemptCounter.setLimit();
         while (execution){
             System.out.println("Insert your guess!");
             this.numIn = scanner.nextInt();
@@ -54,7 +54,7 @@ public class Guesser {
 //    }
 
     //Play again function
-    private void playAgain() {
+    public void playAgain() {
         System.out.println("Want to play again? [y/n]");
         playA = scanner.next();
         switch (playA){
