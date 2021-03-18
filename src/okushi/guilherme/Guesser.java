@@ -20,6 +20,7 @@ public class Guesser {
     //Receive guess, set the limit and send to the guessCalculator
     public void gameSystem() {
         this.randNum = rand.getRandomNumber();
+        AttemptCounter.resetAll();
         //Max number of attempts
         AttemptCounter.setLimit();
         while (execution){
@@ -28,8 +29,7 @@ public class Guesser {
             //System.out.println("O numero correto é: " + randNum);
             guessCalculator(this.numIn);
             if (!AttemptCounter.compareLimit()){
-                //gameOver();
-                playAgain();
+                gameOver();
             }
         }
     }
@@ -49,13 +49,14 @@ public class Guesser {
         }
 
     }
-//    public void gameOver(){
-//        if((att.limit + 1) == att.attNum){
-//            System.out.println("You reached your" + att.limit + "attempts");
-//            System.out.println("GAME OVER");
-//            playAgain();
-//        }
-//    }
+    private void gameOver(){
+
+        System.out.println("You reached your limit of " + AttemptCounter.counter + " attempts");
+        System.out.println("GAME OVER");
+
+        playAgain();
+
+    }
 
     //Play again function
     public void playAgain() {
@@ -66,6 +67,7 @@ public class Guesser {
                 gameSystem();
                 break;
             case "n":
+            System.out.println("Thank you for playing!");
                 execution = false;
                 break;
             default:
