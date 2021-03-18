@@ -7,9 +7,11 @@ public class Guesser {
     private int randNum;
     private int numIn;
     private String playA;
+    private int op = 0;
     private boolean execution;
     private Scanner scanner;
     private RandNumber rand = new RandNumber();
+
 
     //Initial conditions
     public Guesser() {
@@ -19,17 +21,23 @@ public class Guesser {
 
     //Receive guess, set the limit, clear previous counters and send guess to the guessCalculator
     public void gameSystem() {
-        this.randNum = rand.getRandomNumber();
-        AttemptCounter.resetAll();
-        //Max number of attempts
-        AttemptCounter.setLimit();
+        if (op == 0) {
+            this.randNum = rand.getRandomNumber();
+            AttemptCounter.resetAll();
+            //Max number of attempts
+            AttemptCounter.setLimit();
+        }
         while (execution){
             System.out.println("Insert your guess!");
             this.numIn = scanner.nextInt();
             //System.out.println("O numero correto é: " + randNum);
             guessCalculator(this.numIn);
             if (!AttemptCounter.compareLimit()){
-                gameOver();
+                System.out.println("resposta" + randNum);
+                if(AttemptCounter.addLimit() == 0){
+                    gameOver();
+                }
+                op = 1;
             }
         }
     }
@@ -50,8 +58,8 @@ public class Guesser {
 
     }
 
-    //Player reached the limit of atempts
-    private void gameOver(){
+    //Player reached the limit of attempts
+    public void gameOver(){
 
         System.out.println("You reached your limit of " + AttemptCounter.checkCount() + " attempts");
         System.out.println("GAME OVER");
@@ -66,6 +74,7 @@ public class Guesser {
         playA = scanner.next();
         switch (playA){
             case "y":
+                op = 0;
                 gameSystem();
                 break;
             case "n":
