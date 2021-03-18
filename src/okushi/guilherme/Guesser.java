@@ -3,7 +3,12 @@ package okushi.guilherme;
 import java.util.Scanner;
 
 public class Guesser {
+    //Time variables
+    private long startTime;
+    private long endTime;
+    private long totalTime;
 
+    private double score;
     private int randNum;
     private int numIn;
     private String playA;
@@ -26,14 +31,13 @@ public class Guesser {
             AttemptCounter.resetAll();
             //Max number of attempts
             AttemptCounter.setLimit();
+            startTime = System.nanoTime();
         }
         while (execution){
             System.out.println("Insert your guess!");
             this.numIn = scanner.nextInt();
-            //System.out.println("O numero correto é: " + randNum);
             guessCalculator(this.numIn);
             if (!AttemptCounter.compareLimit()){
-                System.out.println("resposta" + randNum);
                 if(AttemptCounter.addLimit() == 0){
                     gameOver();
                 }
@@ -58,10 +62,15 @@ public class Guesser {
 
     }
 
+    private double scoreCalculator(){
+        double sda = AttemptCounter.checkCount();
+        score = Math.round((1/sda) * 1000);
+        return score;
+    }
     //Player reached the limit of attempts
     public void gameOver(){
-
         System.out.println("You reached your limit of " + AttemptCounter.checkCount() + " attempts");
+        System.out.println("Score: " + scoreCalculator());
         System.out.println("GAME OVER");
 
         playAgain();
@@ -70,6 +79,7 @@ public class Guesser {
 
     //Play again function
     public void playAgain() {
+        System.out.println("Score: " + scoreCalculator());
         System.out.println("Want to play again? [y/n]");
         playA = scanner.next();
         switch (playA){
@@ -83,6 +93,7 @@ public class Guesser {
                 break;
             default:
                 System.out.println("Invalid answer\n");
+                playAgain();
         }
 
     }

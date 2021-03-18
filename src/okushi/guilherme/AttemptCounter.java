@@ -57,6 +57,7 @@ public class AttemptCounter {
                 break;
             default:
                 System.out.println("Invalid input");
+                addLimit();
         }
         return op;
     }
